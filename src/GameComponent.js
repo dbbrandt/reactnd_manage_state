@@ -12,22 +12,19 @@ export class GameComponent extends Component {
     const value3 = this.randomValue();
     const correctAnswer = value1 + value2 + value3;
     const proposedAnswer = Math.floor(Math.random() * 3) + correctAnswer;
-    const correct = proposedAnswer === correctAnswer;
-    const trueValue = correct ? 1 : 0;
-    const falseValue = correct ? 0 : 1;
+    // Pre-calculate the result of pressing true or false
+    const trueValue = proposedAnswer === correctAnswer;
     return(
-    <div className="game">
-      <h2>Mental Math</h2>
-      <div className="equation">
-        <p className="text">
-          {`${value1} + ${value2} + ${value3} = ${proposedAnswer}`}
-        </p>
+      <div>
+        <h2>Mental Math</h2>
+        <div className="equation">
+          <p className="text">
+            {`${value1} + ${value2} + ${value3} = ${proposedAnswer}`}
+          </p>
+        </div>
+        <button onClick={() => this.props.handleAnswer(trueValue)}>True</button>
+        <button onClick={() => this.props.handleAnswer(!trueValue)}>False</button>
       </div>
-      <button onClick={() => this.props.onButtonClick(trueValue)}>True</button>
-      <button onClick={() => this.props.onButtonClick(falseValue)}>False</button>
-      <p className="text">
-        Your Score: {this.props.correct}/{this.props.questions}
-      </p>
-    </div>
-    )}
+    );
+  }
 }

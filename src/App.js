@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { GameComponent } from  './GameComponent';
+import { ScoreComponent} from "./ScoreComponent";
 
 class App extends Component {
   state = {
@@ -9,7 +10,7 @@ class App extends Component {
     numCorrect: 0,
   }
 
-  handleClick = (correct) =>  {
+  handleAnswer = (correct) =>  {
     this.setState((prevState) => ({
       numQuestions: prevState.numQuestions + 1,
       numCorrect: prevState.numCorrect + correct,
@@ -23,9 +24,11 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">ReactND - Coding Practice</h1>
         </header>
-        <GameComponent questions={this.state.numQuestions}
-                       correct={this.state.numCorrect}
-                       onButtonClick={this.handleClick}/>
+        <div className="game">
+          <GameComponent handleAnswer={this.handleAnswer}/>
+          <ScoreComponent questions={this.state.numQuestions}
+                          correct={this.state.numCorrect}/>
+        </div>
       </div>
     );
   }
