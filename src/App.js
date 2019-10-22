@@ -17,6 +17,10 @@ class App extends Component {
     }));
   }
 
+  handleReset = () => {
+    this.setState({numCorrect: 0, numQuestions: 0});
+  }
+
   render() {
     return (
       <div className="App">
@@ -29,6 +33,7 @@ class App extends Component {
           <ScoreComponent questions={this.state.numQuestions}
                           correct={this.state.numCorrect}/>
         </div>
+        <button onClick={this.handleReset}>Reset</button>
       </div>
     );
   }
